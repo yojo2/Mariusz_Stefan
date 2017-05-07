@@ -66,9 +66,18 @@ namespace Mariusz_Stefan
 
 		private async Task MessageReceived(SocketMessage message)
 		{
-			switch (message.Content)
+			if (message.Channel.Name != "tts")
+				return;
+
+			string possibleCommand;
+			if (message.Content.Contains(" "))
+				possibleCommand = message.Content.Substring(0, message.Content.IndexOf(' ')).Trim();
+			else
+				possibleCommand = message.Content;
+
+			switch (possibleCommand)
 			{
-				case "help":
+				case "!help":
 					await message.Channel.SendMessageAsync(Help());
 					break;
 				#region Gdzie/Komu/Kiedy
@@ -122,7 +131,6 @@ namespace Mariusz_Stefan
 					await message.Channel.SendMessageAsync(Ile());
 					break;
 				case "!mmm":
-				case "it gets bigger when I pull":
 					await message.Channel.SendMessageAsync(new string('m', r.Next(3, 15)));
 					break;
 				case "!brawo":
@@ -149,6 +157,9 @@ namespace Mariusz_Stefan
 						return;
 
 					#region Pushing Gaywards
+
+					if ("it gets bigger when I pull" == message.Content)
+						await message.Channel.SendMessageAsync(new string('m', r.Next(3, 15)));
 
 					if (Regex.IsMatch(content, "^(O|o)h shit (I|i)\'?m sorry(!|.)?$"))
 						await message.Channel.SendMessageAsync("Sorry for what?");
@@ -307,7 +318,7 @@ namespace Mariusz_Stefan
 
 		private string Boruc()
 		{
-			return Extensions.RandomChoice(new[] {"brawo brawo", "brawo"}) + "Artur Boruc";
+			return Extensions.RandomChoice(new[] {"brawo brawo ", "brawo "}) + "Artur Boruc";
 		}
 
 		private string Help()
