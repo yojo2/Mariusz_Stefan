@@ -109,7 +109,7 @@ namespace Mariusz_Stefan
 					await message.Channel.SendMessageAsync(Ocen());
 					break;
 				case "!fullwidth":
-					await message.Channel.SendMessageAsync(FullWidth(message.Content.Substring("!fullwidth".Length - 1)));
+					await message.Channel.SendMessageAsync(FullWidth(message.Content.Substring("!fullwidth".Length)));
 					break;
 				case "!behe":
 					await message.Channel.SendMessageAsync(Behe());
@@ -149,6 +149,12 @@ namespace Mariusz_Stefan
 				case "!piwo":
 				case "!barman":
 					await message.Channel.SendMessageAsync(LiwkoLiwkoSkoczPoPiwko(message.Channel));
+					break;
+				case "!pedal":
+				case "!gej":
+				case "!gejas":
+				case "!gay":
+					await message.Channel.SendMessageAsync(Pedal());
 					break;
 				default:
 				{
@@ -258,7 +264,7 @@ namespace Mariusz_Stefan
 		private string FullWidth(string input)
 		{
 			var s = Regex.Replace(input.ToUpper(), ".{1}", "$0 ");
-			return s;
+			return s.Trim();
 		}
 
 		private string Kicek()
@@ -328,11 +334,16 @@ namespace Mariusz_Stefan
 			       "behe, kicek, tebeg, ocen, pfrt, kto, kogo, gdzie, kim, fullwidth, piwo";
 		}
 
+		private string Pedal()
+		{
+			return Extensions.RandomChoice(Resources.pedal.Split(','));
+		}
+
 		private string LiwkoLiwkoSkoczPoPiwko(IChannel msgChannel)
 		{
 			var usersList = msgChannel.GetUsersAsync(CacheMode.CacheOnly).ToArray().Result;
-			var t = usersList.ElementAt(r.Next(0, usersList.Length));
-			var user = t.ElementAt(r.Next(0, t.Count)).Mention;
+			var t = usersList.ElementAt(r.Next(0, usersList.Length)).Where(u => u.Status != UserStatus.Offline).ToArray();
+			var user = t.ElementAt(r.Next(0, t.Length)).Mention;
 			
 			return user + ", " + Extensions.RandomChoice(new[] {"skocz", "idź", "przeleć się"}) + " do " + 
 			       Extensions.RandomChoice(new[]

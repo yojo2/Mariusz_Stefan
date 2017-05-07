@@ -151,6 +151,15 @@ namespace Mariusz_Stefan {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to sam jesteś pedałem, sam jesteś gejem, lubię homosiów, chodź przytul mnie.
+        /// </summary>
+        internal static string pedal {
+            get {
+                return ResourceManager.GetString("pedal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to witam na kanale i życzę miłej zabawy, cześć, kopę lat, siemanko witam na moim kanale, witam witam również, no elo, salam alejkum, привет, dzińdybry.
         /// </summary>
         internal static string witam {
