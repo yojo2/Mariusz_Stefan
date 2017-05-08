@@ -66,7 +66,9 @@ namespace Mariusz_Stefan
 
 		private async Task MessageReceived(SocketMessage message)
 		{
-			if (message.Channel.Name != "tts")
+			if (message.Channel.Name != "tts" 
+				&& message.Channel.Name != "politbiuro" 
+				&& message.Channel.Name != "linki")
 				return;
 
 			string possibleCommand;
