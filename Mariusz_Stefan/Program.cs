@@ -10,6 +10,8 @@ using Google.Apis.YouTube.v3;
 
 //todo:
 // -IMAGE SEARCH
+// -move slap command tets to resx
+// -create 3 dictionaries with string -> proper func mapping
 
 namespace Mariusz_Stefan
 {
@@ -402,6 +404,7 @@ namespace Mariusz_Stefan
 			var usersList = msgChannel.GetUsersAsync(CacheMode.CacheOnly).ToArray().Result;
 			var t = usersList.ElementAt(r.Next(0, usersList.Length)).Where(u => u.Status != UserStatus.Offline).ToArray();
 			var user = t.Where(u => u.Username.ToLower().Trim().Equals(userToSlap.ToLower().Trim())).FirstOrDefault();
+			
 			var slappedPerson = "himself";
 			if (user != null)
 				slappedPerson = user.Mention;
