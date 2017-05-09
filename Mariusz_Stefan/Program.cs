@@ -1,18 +1,15 @@
 ﻿using Discord;
 using Discord.WebSocket;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Reflection.Emit;
-using System.Runtime.Remoting.Services;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Google.Apis.Customsearch.v1;
 using Google.Apis.Services;
-
-using Google.Apis.Translate.v2;
-using Google.Apis.Translate.v2.Data;
 using Google.Apis.YouTube.v3;
-using TranslationsResource = Google.Apis.Translate.v2.Data.TranslationsResource;
+
+//todo:
+// -IMAGE SEARCH
 
 namespace Mariusz_Stefan
 {
@@ -20,8 +17,10 @@ namespace Mariusz_Stefan
 	{
 		private static readonly string YouTubeDataAPIKey = "AIzaSyBrWyFrmFM7whCXLTjpqIxXB23X2jQdH4I";
 		private static readonly string GoogleSearchAPIKey = "AIzaSyCufIRURGbtamFxKMBvD1-0eVkdnHRm1YY";
-		private static readonly string GoogleTranslateAPIKey = "AIzaSyBekSX7IyrgWGBYNpHP3sm4-_jnqgt4e94";
+		private static readonly string GoogleSearchEngineID = "006368784700686828841:4upmxfu-xhe";
 		private static readonly char SplitCharacter = ',';
+		private CustomsearchService _customsearchService;
+
 		private readonly Random r = new Random();
 
 		public static void Main(string[] args)
@@ -29,6 +28,8 @@ namespace Mariusz_Stefan
 
 		public async Task MainAsync()
 		{
+			_customsearchService = new CustomsearchService(new BaseClientService.Initializer {ApiKey = GoogleSearchAPIKey});
+
 			var client = new DiscordSocketClient();
 
 			client.Log += Logger;
@@ -37,7 +38,7 @@ namespace Mariusz_Stefan
 			var token = "MzA3NjEzMzU0OTUwNzg3MDcy.C-U27g.MDa8cJhnFFaL9JIalK7llW4MFrk"; // Remember to keep this private!
 			await client.LoginAsync(TokenType.Bot, token);
 			await client.StartAsync();
-			
+
 			// Block this task until the program is closed.
 			await Task.Delay(-1);
 		}
@@ -69,9 +70,9 @@ namespace Mariusz_Stefan
 
 		private async Task MessageReceived(SocketMessage message)
 		{
-			if (message.Channel.Name != "tts" 
-				&& message.Channel.Name != "politbiuro" 
-				&& message.Channel.Name != "linki")
+			if (message.Channel.Name != "tts"
+			    && message.Channel.Name != "politbiuro"
+			    && message.Channel.Name != "linki")
 				return;
 
 			string possibleCommand;
@@ -89,7 +90,14 @@ namespace Mariusz_Stefan
 					var video = await YoutubeQuery(message.Content.Substring(".yt".Length));
 					await message.Channel.SendMessageAsync(video);
 					break;
-				#region Gdzie/Komu/Kiedy
+				case ".g":
+					await message.Channel.SendMessageAsync(GoogleSearchQuery(message.Content.Substring(".g".Length)));
+					break;
+				case ".slap":
+					await message.Channel.SendMessageAsync(Slap(message.Author.Mention, message.Content.Substring(".slap".Length), message.Channel));
+					break;
+
+					#region Gdzie/Komu/Kiedy
 
 				case ".gdzie":
 					await message.Channel.SendMessageAsync(Gdzie());
@@ -107,7 +115,8 @@ namespace Mariusz_Stefan
 					await message.Channel.SendMessageAsync(Kogo());
 					break;
 
-				#endregion
+					#endregion
+
 				case ".pfrt":
 					await message.Channel.SendMessageAsync(Pfrt());
 					break;
@@ -155,6 +164,9 @@ namespace Mariusz_Stefan
 				case ".bazinga":
 					await message.Channel.SendMessageAsync(Bazinga());
 					break;
+				case ".rimshot":
+					await message.Channel.SendMessageAsync("Ba-dum-pish!");
+					break;
 				case ".piwo":
 				case ".barman":
 					await message.Channel.SendMessageAsync(LiwkoLiwkoSkoczPoPiwko(message.Channel));
@@ -192,6 +204,9 @@ namespace Mariusz_Stefan
 						await message.Channel.SendMessageAsync("gówno 1:0");
 					else if (content.StartsWith("8=D"))
 						await message.Channel.SendMessageAsync(Dick());
+					else if (Regex.IsMatch(content, "^((C|c)ze(ś|s)(ć|c)|(S|s)iemk?a|((W|w)itam){1,}|(F|f)eedlysiemka)") &&
+					         !message.Author.IsBot)
+						await message.Channel.SendMessageAsync(Witam());
 					else
 					{
 						foreach (var s in Resources.wulg.Split(SplitCharacter))
@@ -330,7 +345,7 @@ namespace Mariusz_Stefan
 		{
 			return "Mariusz Stefan poleca następujące funkcje: \n" +
 			       "help, ,boruc, bazinga, abcd, taknie, czy, ile, witam, " +
-			       "behe, kicek, tebeg, ocen, pfrt, kto, kogo, gdzie, kim, fullwidth, piwo, yt";
+			       "behe, kicek, tebeg, ocen, pfrt, kto, kogo, gdzie, kim, fullwidth, piwo, yt, g";
 		}
 
 		private string Pedal()
@@ -343,8 +358,8 @@ namespace Mariusz_Stefan
 			var usersList = msgChannel.GetUsersAsync(CacheMode.CacheOnly).ToArray().Result;
 			var t = usersList.ElementAt(r.Next(0, usersList.Length)).Where(u => u.Status != UserStatus.Offline).ToArray();
 			var user = t.ElementAt(r.Next(0, t.Length)).Mention;
-			
-			return user + ", " + Extensions.RandomChoice(new[] {"skocz", "idź", "przeleć się"}) + " do " + 
+
+			return user + ", " + Extensions.RandomChoice(new[] {"skocz", "idź", "przeleć się"}) + " do " +
 			       Extensions.RandomChoice(new[]
 				       {"osiedlowego", "monopolowego", "lodówki", "barku", "sklepu", "Biedronki", "baru"}) + " po " +
 			       Extensions.RandomChoice(new[]
@@ -353,43 +368,51 @@ namespace Mariusz_Stefan
 				       "Carlsberga", "Pilsnera Urquella", "Budweisera", "Rolling Rock", "Koczkodana"
 			       });
 		}
-		#endregion
 
-		// TODO: returns 403 daily limit exceeded :(
-		#region Google Translate
+		string[] slap_verbs = {"slaps", "hits", "smashes", "beats", "bashes", "smacks", "blasts", "punches", "stabs",
+			"kills", "decapitates", "crushes", "devastates", "massacres", "assaults", "tackles", "abuses", "slams", "slaughters",
+			"obliderates", "wipes out", "pulverizes", "granulates", "stuns", "knocks out", "strikes", "bitchslaps", "scratches",
+			"pounds", "bangs", "whacks", "rapes", "eats", "destroys", "does nothing to", "dooms", "evaporates",
+			"does something to", "taunts", "disrespects", "disarms", "mauls", "dismembers", "defuses", "butchers", "annihilates",
+			"tortures", "shatters", "wrecks", "toasts", "dominates", "suffocates", "oxidises", "erases", "stomps", "zaps",
+			"whomps", "swipes", "pats", "nails", "thumps", "*PAC*"};
+		string[] slap_areas = {"around the head", "viciously", "repeatedly", "in the face", "to death", "in the balls",
+			"in the ass", "savagely", "brutally", "infinitely", "deeply", "mercilessly", "randomly", "homosexually",
+			"keenly", "accurately", "ironically", "gayly", "outrageously", "straight through the heart", "immediately", "unavoidably",
+			"from the inside", "around a bit", "from outer space", "gently", "silently", "for real", "for no apparent reason", "specifically", "maybe",
+			"allegedly", "once and for all", "for life", "stealthly", "energetically", "frightfully", "in the groin", "in the dignity", "in the heels",
+			"in the nostrils", "in the ears", "in the eyes", "in the snout", "fearfully", "appallingly", "vigorously", "hrabully"};
+		string[] slap_sizes = {"large", "huge", "small", "tiny", "enormous", "massive", "rusty", "gay", "pink", "sharpened", "lethal",
+			"poisoned", "toxic", "incredible", "powerful", "wonderful", "priceless", "explosive", "rotten", "smelly", "puny", "toy", "deadly",
+			"mortal", "second-rate", "second-hand", "otherwise useless", "magical", "pneumatic", "manly", "sissy", "iron", "steel", "golden", "filthy",
+			"semi-automatic", "invisible", "infected", "spongy", "sharp-pointed", "undead", "horrible", "intimidating", "murderous", "intergalactic", "serious",
+			"nuclear", "cosmic", "mad", "insane", "rocket-propelled", "holy", "super", "homosexual", "imaginary", "airborne", "atomic", "huge", "lazy", "stupid",
+			"communist", "creepy", "slimy", "nazi", "heavyweight", "lightweight", "thin", "thick"};
+		string[] slap_tools = {"trout", "fork", "mouse", "bear", "piano", "cello", "vacuum", "mosquito", "sewing needle", "nail",
+			"fingernail", "opti", "penis", "whale", "cookie", "straight-arm punch", "roundhouse kick", "training shoe", "dynamite stick",
+			"Justin Bieber CD", "fart cloud", "dildo", "lightsaber", "rock", "stick", "nigger", "dinosaur", "soap", "foreskin", "sock", "underwear",
+			"herring", "spider", "snake", "ming vase", "cow", "jackhammer", "hammer and sickle", "razorblade", "daemon", "trident", "gofer", "alligator",
+			"bag of piss", "lobster", "beer pad", "toaster", "printer", "nailgun", "banana bomb", "fetus", "unicorn statue", "blood vial", "electron", "spell",
+			"tin of spam", "behemoth", "hand grenade", "hand of God", "fist of fury", "erection", "Pudzian\"s egg kick", "pimp hand", "darth fallus", "dog turd",
+			"canoe", "Atari 5200", "booby trap", "Gaben", "fishbot", "syntax error", "blue screen of death"};
 
-		private async Task<string> Translate(string input, string targetLang)
+		//todo: spelling
+		private string Slap(string slappingUser, string userToSlap, IChannel msgChannel)
 		{
-			var service = new TranslateService(new BaseClientService.Initializer()
-			{
-				ApiKey = GoogleTranslateAPIKey,
-				ApplicationName = "Mariusz_stefan"
-			});
+			var usersList = msgChannel.GetUsersAsync(CacheMode.CacheOnly).ToArray().Result;
+			var t = usersList.ElementAt(r.Next(0, usersList.Length)).Where(u => u.Status != UserStatus.Offline).ToArray();
+			var user = t.Where(u => u.Username.ToLower().Trim().Equals(userToSlap.ToLower().Trim())).FirstOrDefault();
+			var slappedPerson = "himself";
+			if (user != null)
+				slappedPerson = user.Mention;
 
-			// Execute the first translation request.
-			try
-			{
-
-				var response = await service.Translations.List(input, targetLang).ExecuteAsync();
-				var translations = new List<string>();
-				foreach (var translation in response.Translations)
-				{
-					translations.Add(translation.TranslatedText);
-					Console.WriteLine("translation :" + translation.TranslatedText);
-				}
-
-				return translations.FirstOrDefault();
-			}
-			catch (Exception e)
-			{
-				Console.WriteLine(e);
-				Console.WriteLine(e.StackTrace);
-			}
-			return string.Empty;
+			return
+				$"{slappingUser} {Extensions.RandomChoice(slap_verbs)} {slappedPerson} {Extensions.RandomChoice(slap_areas)} with a {Extensions.RandomChoice(slap_sizes)} {Extensions.RandomChoice(slap_tools)}";
 		}
 
 		#endregion
 
+		#region Google
 		private async Task<string> YoutubeQuery(string query)
 		{
 			var youtubeService = new YouTubeService(new BaseClientService.Initializer()
@@ -404,10 +427,21 @@ namespace Mariusz_Stefan
 
 			// Call the search.list method to retrieve results matching the specified query term.
 			var searchListResponse = await searchListRequest.ExecuteAsync();
-			
+
 			return $"https://www.youtube.com/watch?v={searchListResponse.Items[0].Id.VideoId}";
 		}
 
-		
+		private string GoogleSearchQuery(string query)
+		{
+			var request = _customsearchService.Cse.List(query);
+			request.Cx = GoogleSearchEngineID;
+
+			var results = request.Execute().Items;
+			return results[0].Link;
+		}
+
+
+
+		#endregion
 	}
 }
