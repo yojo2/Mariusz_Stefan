@@ -11,12 +11,15 @@ using Google.Apis.Services;
 
 using Google.Apis.Translate.v2;
 using Google.Apis.Translate.v2.Data;
+using Google.Apis.YouTube.v3;
 using TranslationsResource = Google.Apis.Translate.v2.Data.TranslationsResource;
 
 namespace Mariusz_Stefan
 {
 	public class Program
 	{
+		private static readonly string YouTubeDataAPIKey = "AIzaSyBrWyFrmFM7whCXLTjpqIxXB23X2jQdH4I";
+		private static readonly string GoogleSearchAPIKey = "AIzaSyCufIRURGbtamFxKMBvD1-0eVkdnHRm1YY";
 		private static readonly string GoogleTranslateAPIKey = "AIzaSyBekSX7IyrgWGBYNpHP3sm4-_jnqgt4e94";
 		private static readonly char SplitCharacter = ',';
 		private readonly Random r = new Random();
@@ -81,6 +84,10 @@ namespace Mariusz_Stefan
 			{
 				case "!help":
 					await message.Channel.SendMessageAsync(Help());
+					break;
+				case "!yt":
+					var video = await YoutubeQuery(message.Content.Substring("!yt".Length));
+					await message.Channel.SendMessageAsync(video);
 					break;
 				#region Gdzie/Komu/Kiedy
 
@@ -185,16 +192,6 @@ namespace Mariusz_Stefan
 						await message.Channel.SendMessageAsync("gówno 1:0");
 					else if (content.StartsWith("8=D"))
 						await message.Channel.SendMessageAsync(Dick());
-					//else if (content.StartsWith("!trpl") && content.Length > 6)
-					//{
-					//	var str = await Translate(content.Substring(5), "pl");
-					//	await message.Channel.SendMessageAsync(str);
-					//}
-					//else if (content.StartsWith("!tren") && content.Length > 6)
-					//{
-					//	var str = await Translate(content.Substring(5), "en");
-					//	await message.Channel.SendMessageAsync(str);
-					//}
 					else
 					{
 						foreach (var s in Resources.wulg.Split(SplitCharacter))
@@ -392,5 +389,25 @@ namespace Mariusz_Stefan
 		}
 
 		#endregion
+
+		private async Task<string> YoutubeQuery(string query)
+		{
+			var youtubeService = new YouTubeService(new BaseClientService.Initializer()
+			{
+				ApiKey = YouTubeDataAPIKey,
+				ApplicationName = this.GetType().ToString()
+			});
+
+			var searchListRequest = youtubeService.Search.List("snippet");
+			searchListRequest.Q = query;
+			searchListRequest.MaxResults = 1;
+
+			// Call the search.list method to retrieve results matching the specified query term.
+			var searchListResponse = await searchListRequest.ExecuteAsync();
+			
+			return $"https://www.youtube.com/watch?v={searchListResponse.Items[0].Id.VideoId}";
+		}
+
+		
 	}
 }
