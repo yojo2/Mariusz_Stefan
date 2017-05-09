@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="czy" xml:space="preserve">
-    <value>tak, nie, nie wiem, być może, na pewno, to mało prawdopodobne, nie sądzę, jeszcze się pytasz?, tak (żartuję, hehe), tak, nie, tak (no homo), zaiste, no chyba cię pambuk opuścił, raczej nie, jeszcze nie, teraz już tak, może kiedyś, tak jest, panie kapitanie, panie januszu NIE, jeszcze nie wiem, daj mi chwilę to się zastanowię</value>
+    <value>tak, nie, nie wiem, być może, na pewno, to mało prawdopodobne, nie sądzę, jeszcze się pytasz?, tak (żartuję, hehe), tak, nie, tak (no homo), zaiste, no chyba cię pambuk opuścił, raczej nie, jeszcze nie, teraz już tak, może kiedyś, tak jest, panie kapitanie, panie januszu NIE, jeszcze nie wiem, daj mi chwilę to się zastanowię, nie wiem zarobiony jestem przyjdź Pan jutro</value>
   </data>
   <data name="gdzie_prefix" xml:space="preserve">
     <value>pod mostem, w dupie, na głowie, na kompie, w parafii</value>
@@ -170,7 +170,8 @@ w Rzeszowie
 w Krakowie
 w Bydgoszczy
 w Magdalence przy stole z pozostałymi zdrajcami
-tam gdzie stało ZOMO</value>
+tam gdzie stało ZOMO
+na serwerze Interii</value>
   </data>
   <data name="kim" xml:space="preserve">
     <value>Turambarem, yojecem, Lordem Nargoghiem, Rankinem, Kathaicem, Behemortem, orgiełem, Stillbornem, Metalusem, kickiem, podbielem, Sedinusem, Hakkenem, Tebegiem, Sermaciejem, t3trisem, optim, Hrabulą, FaceDancerem, Holim.Death, Ramzesem, POLIPem, mateuszem(stefanem), Xysiem, Germanotta, Berlinem, 8azyliszkiem, Seekerem, Murezorem, RIPem, Aidenem, Accounem</value>
@@ -182,10 +183,44 @@ tam gdzie stało ZOMO</value>
     <value>Turambar, yojec, Lord Nargogh, Rankin, Kathai, Behemort, orgiełe, Stillborn, Metalus, kicek, podbiel, Sedinus, Hakken, Tebeg, Sermaciej, t3tris, opti, Hrabula, FaceDancer, Holy.Death, Ramzes, POLIP, mateusz(stefan), Xysiu, Germanotta, Berlin, 8azyliszek, Seeker, Murezor, RIP, Aiden, Accoun</value>
   </data>
   <data name="pedal" xml:space="preserve">
-    <value>sam jesteś pedałem, sam jesteś gejem, lubię homosiów, chodź przytul mnie, jak ty do mnie mówisz, lubię gdy mnie tak nazywasz</value>
+    <value>sam jesteś pedałem, sam jesteś gejem, lubię homosiów, chodź przytul mnie, jak ty do mnie mówisz, lubię gdy mnie tak nazywasz, przytul mnie ze swych ramion zbuduj schron</value>
+  </data>
+  <data name="slap_areas" xml:space="preserve">
+    <value>around the head, viciously, repeatedly, in the face, to death, in the balls,
+in the ass, savagely, brutally, infinitely, deeply, mercilessly, randomly, homosexually,
+keenly, accurately, ironically, gayly, outrageously, straight through the heart, immediately, unavoidably,
+from the inside, around a bit, from outer space, gently, silently, for real, for no apparent reason, specifically, maybe,
+allegedly, once and for all, for life, stealthly, energetically, frightfully, in the groin, in the dignity, in the heels,
+in the nostrils, in the ears, in the eyes, in the snout, fearfully, appallingly, vigorously, hrabully</value>
+  </data>
+  <data name="slap_sizes" xml:space="preserve">
+    <value>large, huge, small, tiny, enormous, massive, rusty, gay, pink, sharpened, lethal,
+poisoned, toxic, incredible, powerful, wonderful, priceless, explosive, rotten, smelly, puny, toy, deadly,
+mortal, second-rate, second-hand, otherwise useless, magical, pneumatic, manly, sissy, iron, steel, golden, filthy,
+semi-automatic, invisible, infected, spongy, sharp-pointed, undead, horrible, intimidating, murderous, intergalactic, serious,
+nuclear, cosmic, mad, insane, rocket-propelled, holy, super, homosexual, imaginary, airborne, atomic, huge, lazy, stupid,
+communist, creepy, slimy, nazi, heavyweight, lightweight, thin, thick</value>
+  </data>
+  <data name="slap_tools" xml:space="preserve">
+    <value>trout, fork, mouse, bear, piano, cello, vacuum, mosquito, sewing needle, nail,
+fingernail, opti, penis, whale, cookie, straight-arm punch, roundhouse kick, training shoe, dynamite stick,
+Justin Bieber CD, fart cloud, dildo, lightsaber, rock, stick, nigger, dinosaur, soap, foreskin, sock, underwear,
+herring, spider, snake, ming vase, cow, jackhammer, hammer and sickle, razorblade, daemon, trident, gofer, alligator,
+bag of piss, lobster, beer pad, toaster, printer, nailgun, banana bomb, fetus, unicorn statue, blood vial, electron, spell,
+tin of spam, behemoth, hand grenade, hand of God, fist of fury, erection, Pudzian\s egg kick, pimp hand, darth fallus, dog turd,
+canoe, Atari 5200, booby trap, Gaben, fishbot, syntax error, blue screen of death</value>
+  </data>
+  <data name="slap_verbs" xml:space="preserve">
+    <value>slaps, hits, smashes, beats, bashes, smacks, blasts, punches, stabs,
+kills, decapitates, crushes, devastates, massacres, assaults, tackles, abuses, slams, slaughters,
+obliderates, wipes out, pulverizes, granulates, stuns, knocks out, strikes, bitchslaps, scratches,
+pounds, bangs, whacks, rapes, eats, destroys, does nothing to, dooms, evaporates,
+does something to, taunts, disrespects, disarms, mauls, dismembers, defuses, butchers, annihilates,
+tortures, shatters, wrecks, toasts, dominates, suffocates, oxidises, erases, stomps, zaps,
+whomps, swipes, pats, nails, thumps, *PAC*</value>
   </data>
   <data name="witam" xml:space="preserve">
-    <value>witam na kanale i życzę miłej zabawy, cześć, kopę lat, siemanko witam na moim kanale, witam witam również, no elo, salam alejkum, привет, dzińdybry, siemaszki</value>
+    <value>witam na kanale i życzę miłej zabawy, cześć, kopę lat, siemanko witam na moim kanale, witam witam również, no elo, salam alejkum, привет, dzińdybry, siemaszki,</value>
   </data>
   <data name="wulg" xml:space="preserve">
     <value>kurw,chuj,pierdol,pierdal,jeb</value>

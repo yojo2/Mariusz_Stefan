@@ -61,7 +61,7 @@ namespace Mariusz_Stefan {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to tak, nie, nie wiem, być może, na pewno, to mało prawdopodobne, nie sądzę, jeszcze się pytasz?, tak (żartuję, hehe), tak, nie, tak (no homo), zaiste, no chyba cię pambuk opuścił, raczej nie, jeszcze nie, teraz już tak, może kiedyś, tak jest, panie kapitanie, panie januszu NIE.
+        ///   Looks up a localized string similar to tak, nie, nie wiem, być może, na pewno, to mało prawdopodobne, nie sądzę, jeszcze się pytasz?, tak (żartuję, hehe), tak, nie, tak (no homo), zaiste, no chyba cię pambuk opuścił, raczej nie, jeszcze nie, teraz już tak, może kiedyś, tak jest, panie kapitanie, panie januszu NIE, jeszcze nie wiem, daj mi chwilę to się zastanowię, nie wiem zarobiony jestem przyjdź Pan jutro.
         /// </summary>
         internal static string czy {
             get {
@@ -70,7 +70,7 @@ namespace Mariusz_Stefan {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to pod mostem, w dupie.
+        ///   Looks up a localized string similar to pod mostem, w dupie, na głowie, na kompie, w parafii.
         /// </summary>
         internal static string gdzie_prefix {
             get {
@@ -99,7 +99,7 @@ namespace Mariusz_Stefan {
         ///Hrabuli,
         ///FaceDancera,
         ///Holiego.Deatha,
-        ///lghosta,
+        ///Ramzesa,
         ///POLIPa,
         ///mateusza(stefana),
         ///Xysia,
@@ -110,12 +110,17 @@ namespace Mariusz_Stefan {
         ///Murezora,
         ///RIPa,
         ///Aidena,
-        ///Trepliev,
         ///Accouna,
         ///u optiego,
         ///na wydziale elektrycznym,
         ///w Kathowicach,
-        ///u Kath w piwnicy.
+        ///u Kath w piwnicy
+        ///we Wrocławiu
+        ///w Szczecinie
+        ///w Brwinowie
+        ///w Warszawie
+        ///w Bogatyni
+        ///w Golubiu-Dobrzyni [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string gdzie_suffix {
             get {
@@ -124,7 +129,7 @@ namespace Mariusz_Stefan {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Turambarem, yojecem, Lordem Nargoghiem, Rankinem, Kathaicem, Behemortem, orgiełem, Stillbornem, Metalusem, kickiem, podbielem, Sedinusem, Hakkenem, Tebegiem, Sermaciejem, t3trisem, optim, Hrabulą, FaceDancerem, Holim.Death, lghostem, POLIPem, mateuszem(stefanem), Xysiem, Germanotta, Berlinem, 8azyliszkiem, Seekerem, Murezorem, RIPem, Aidenem, Trepliev, Accounem.
+        ///   Looks up a localized string similar to Turambarem, yojecem, Lordem Nargoghiem, Rankinem, Kathaicem, Behemortem, orgiełem, Stillbornem, Metalusem, kickiem, podbielem, Sedinusem, Hakkenem, Tebegiem, Sermaciejem, t3trisem, optim, Hrabulą, FaceDancerem, Holim.Death, Ramzesem, POLIPem, mateuszem(stefanem), Xysiem, Germanotta, Berlinem, 8azyliszkiem, Seekerem, Murezorem, RIPem, Aidenem, Accounem.
         /// </summary>
         internal static string kim {
             get {
@@ -133,7 +138,7 @@ namespace Mariusz_Stefan {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Turambara, yojca, Lorda Nargogha, Rankina, Kathai, Behemorta, orgieła, Stillborna, Metalusa, kicka, podbiela, Sedinusa, Hakkena, Tebega, Sermacieja, t3trisa, optiego, FaceDancera, Holiego.Deatha, lghosta, POLIPa, mateusza(stefana), Xysia, Germanotty, Berlina, 8azyliszka, Seekera, Murezora, RIPa, Aidena, Trepliev, Accouna.
+        ///   Looks up a localized string similar to Turambara, yojca, Lorda Nargogha, Rankina, Kathai, Behemorta, orgieła, Stillborna, Metalusa, kicka, podbiela, Sedinusa, Hakkena, Tebega, Sermacieja, t3trisa, optiego, FaceDancera, Holiego.Deatha, Ramzesa, POLIPa, mateusza(stefana), Xysia, Germanotty, Berlina, 8azyliszka, Seekera, Murezora, RIPa, Aidena,  Accouna.
         /// </summary>
         internal static string kogo {
             get {
@@ -142,7 +147,7 @@ namespace Mariusz_Stefan {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Turambar, yojec, Lord Nargogh, Rankin, Kathai, Behemort, orgiełe, Stillborn, Metalus, kicek, podbiel, Sedinus, Hakken, Tebeg, Sermaciej, t3tris, opti, Hrabula, FaceDancer, Holy.Death, lghost, POLIP, mateusz(stefan), Xysiu, Germanotta, Berlin, 8azyliszek, Seeker, Murezor, RIP, Aiden, Trepliev, Accoun.
+        ///   Looks up a localized string similar to Turambar, yojec, Lord Nargogh, Rankin, Kathai, Behemort, orgiełe, Stillborn, Metalus, kicek, podbiel, Sedinus, Hakken, Tebeg, Sermaciej, t3tris, opti, Hrabula, FaceDancer, Holy.Death, Ramzes, POLIP, mateusz(stefan), Xysiu, Germanotta, Berlin, 8azyliszek, Seeker, Murezor, RIP, Aiden, Accoun.
         /// </summary>
         internal static string kto {
             get {
@@ -151,7 +156,7 @@ namespace Mariusz_Stefan {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to sam jesteś pedałem, sam jesteś gejem, lubię homosiów, chodź przytul mnie.
+        ///   Looks up a localized string similar to sam jesteś pedałem, sam jesteś gejem, lubię homosiów, chodź przytul mnie, jak ty do mnie mówisz, lubię gdy mnie tak nazywasz, przytul mnie ze swych ramion zbuduj schron.
         /// </summary>
         internal static string pedal {
             get {
@@ -160,7 +165,60 @@ namespace Mariusz_Stefan {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to witam na kanale i życzę miłej zabawy, cześć, kopę lat, siemanko witam na moim kanale, witam witam również, no elo, salam alejkum, привет, dzińdybry.
+        ///   Looks up a localized string similar to around the head, viciously, repeatedly, in the face, to death, in the balls,
+        ///in the ass, savagely, brutally, infinitely, deeply, mercilessly, randomly, homosexually,
+        ///keenly, accurately, ironically, gayly, outrageously, straight through the heart, immediately, unavoidably,
+        ///from the inside, around a bit, from outer space, gently, silently, for real, for no apparent reason, specifically, maybe,
+        ///allegedly, once and for all, for life, stealthly, energetically, frightfully, in the groin, in the dignity, in th [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string slap_areas {
+            get {
+                return ResourceManager.GetString("slap_areas", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to large, huge, small, tiny, enormous, massive, rusty, gay, pink, sharpened, lethal,
+        ///poisoned, toxic, incredible, powerful, wonderful, priceless, explosive, rotten, smelly, puny, toy, deadly,
+        ///mortal, second-rate, second-hand, otherwise useless, magical, pneumatic, manly, sissy, iron, steel, golden, filthy,
+        ///semi-automatic, invisible, infected, spongy, sharp-pointed, undead, horrible, intimidating, murderous, intergalactic, serious,
+        ///nuclear, cosmic, mad, insane, rocket-propelled, holy, super, homosexual, ima [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string slap_sizes {
+            get {
+                return ResourceManager.GetString("slap_sizes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to trout, fork, mouse, bear, piano, cello, vacuum, mosquito, sewing needle, nail,
+        ///fingernail, opti, penis, whale, cookie, straight-arm punch, roundhouse kick, training shoe, dynamite stick,
+        ///Justin Bieber CD, fart cloud, dildo, lightsaber, rock, stick, nigger, dinosaur, soap, foreskin, sock, underwear,
+        ///herring, spider, snake, ming vase, cow, jackhammer, hammer and sickle, razorblade, daemon, trident, gofer, alligator,
+        ///bag of piss, lobster, beer pad, toaster, printer, nailgun, banana bomb, fetus, unicorn sta [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string slap_tools {
+            get {
+                return ResourceManager.GetString("slap_tools", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to slaps, hits, smashes, beats, bashes, smacks, blasts, punches, stabs,
+        ///kills, decapitates, crushes, devastates, massacres, assaults, tackles, abuses, slams, slaughters,
+        ///obliderates, wipes out, pulverizes, granulates, stuns, knocks out, strikes, bitchslaps, scratches,
+        ///pounds, bangs, whacks, rapes, eats, destroys, does nothing to, dooms, evaporates,
+        ///does something to, taunts, disrespects, disarms, mauls, dismembers, defuses, butchers, annihilates,
+        ///tortures, shatters, wrecks, toasts, dominates, suffocates,  [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string slap_verbs {
+            get {
+                return ResourceManager.GetString("slap_verbs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to witam na kanale i życzę miłej zabawy, cześć, kopę lat, siemanko witam na moim kanale, witam witam również, no elo, salam alejkum, привет, dzińdybry, siemaszki,.
         /// </summary>
         internal static string witam {
             get {
@@ -178,7 +236,7 @@ namespace Mariusz_Stefan {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to może byś tak kurwa nie przeklinał, co?, bez wulgaryzmów proszę, na ten kanał zaglądają dzieci, ostrożniej z językiem, to kanał PG13, czy mam ci język uciąć?, przestań przeklinać pedale bo cię stąd wypierdolę dyscyplinarnie, pambuk płacze jak przeklinasz, mów do mnie brzydko, Kath bączy jak przeklinasz.
+        ///   Looks up a localized string similar to może byś tak kurwa nie przeklinał, co?, bez wulgaryzmów proszę, na ten kanał zaglądają dzieci, ostrożniej z językiem, to kanał PG13, czy mam ci język uciąć?, przestań przeklinać pedale bo cię stąd wypierdolę dyscyplinarnie, pambuk płacze jak przeklinasz, mów do mnie brzydko, Kath bączy jak przeklinasz, proszę tu nie przeklinać to porządna knajpa.
         /// </summary>
         internal static string wulg_response {
             get {
