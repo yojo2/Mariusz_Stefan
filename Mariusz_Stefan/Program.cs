@@ -82,87 +82,87 @@ namespace Mariusz_Stefan
 
 			switch (possibleCommand)
 			{
-				case "!help":
+				case ".help":
 					await message.Channel.SendMessageAsync(Help());
 					break;
-				case "!yt":
-					var video = await YoutubeQuery(message.Content.Substring("!yt".Length));
+				case ".yt":
+					var video = await YoutubeQuery(message.Content.Substring(".yt".Length));
 					await message.Channel.SendMessageAsync(video);
 					break;
 				#region Gdzie/Komu/Kiedy
 
-				case "!gdzie":
+				case ".gdzie":
 					await message.Channel.SendMessageAsync(Gdzie());
 					break;
-				case "!kim":
+				case ".kim":
 					await message.Channel.SendMessageAsync(Kim());
 					break;
-				case "!kto":
+				case ".kto":
 					await message.Channel.SendMessageAsync(Kto());
 					break;
-				case "!kogo":
-				case "!czyje":
-				case "!czyja":
-				case "!czyim":
+				case ".kogo":
+				case ".czyje":
+				case ".czyja":
+				case ".czyim":
 					await message.Channel.SendMessageAsync(Kogo());
 					break;
 
 				#endregion
-				case "!pfrt":
+				case ".pfrt":
 					await message.Channel.SendMessageAsync(Pfrt());
 					break;
-				case "!tebeg":
+				case ".tebeg":
 					await message.Channel.SendMessageAsync(Tebeg());
 					break;
-				case "!ocen":
+				case ".ocen":
 					await message.Channel.SendMessageAsync(Ocen());
 					break;
-				case "!fullwidth":
-					await message.Channel.SendMessageAsync(FullWidth(message.Content.Substring("!fullwidth".Length)));
+				case ".fullwidth":
+					await message.Channel.SendMessageAsync(FullWidth(message.Content.Substring(".fullwidth".Length)));
 					break;
-				case "!behe":
+				case ".behe":
 					await message.Channel.SendMessageAsync(Behe());
 					break;
-				case "!kiceg":
-				case "!kicek":
+				case ".kiceg":
+				case ".kicek":
 					await message.Channel.SendMessageAsync(Kicek());
 					break;
-				case "!witam":
-				case "!cześć":
-				case "!czesc":
-				case "!siemka":
+				case ".witam":
+				case ".cześć":
+				case ".czesc":
+				case ".siemka":
 					await message.Channel.SendMessageAsync(Witam());
 					break;
-				case "!czy":
+				case ".czy":
 					await message.Channel.SendMessageAsync(Czy());
 					break;
-				case "!ile":
+				case ".ile":
 					await message.Channel.SendMessageAsync(Ile());
 					break;
-				case "!mmm":
+				case ".mmm":
 					await message.Channel.SendMessageAsync(new string('m', r.Next(3, 15)));
 					break;
-				case "!brawo":
-				case "!boruc":
+				case ".brawo":
+				case ".boruc":
 					await message.Channel.SendMessageAsync(Boruc());
 					break;
-				case "!taknie":
+				case ".taknie":
 					await message.Channel.SendMessageAsync(TakNie());
 					break;
-				case "!abcd":
+				case ".abcd":
 					await message.Channel.SendMessageAsync(Abcd());
 					break;
-				case "!bazinga":
+				case ".bazinga":
 					await message.Channel.SendMessageAsync(Bazinga());
 					break;
-				case "!piwo":
-				case "!barman":
+				case ".piwo":
+				case ".barman":
 					await message.Channel.SendMessageAsync(LiwkoLiwkoSkoczPoPiwko(message.Channel));
 					break;
-				case "!pedal":
-				case "!gej":
-				case "!gejas":
-				case "!gay":
+				case ".pedal":
+				case ".gej":
+				case ".gejas":
+				case ".gay":
 					await message.Channel.SendMessageAsync(Pedal());
 					break;
 				default:
@@ -330,7 +330,7 @@ namespace Mariusz_Stefan
 		{
 			return "Mariusz Stefan poleca następujące funkcje: \n" +
 			       "help, ,boruc, bazinga, abcd, taknie, czy, ile, witam, " +
-			       "behe, kicek, tebeg, ocen, pfrt, kto, kogo, gdzie, kim, fullwidth, piwo";
+			       "behe, kicek, tebeg, ocen, pfrt, kto, kogo, gdzie, kim, fullwidth, piwo, yt";
 		}
 
 		private string Pedal()
