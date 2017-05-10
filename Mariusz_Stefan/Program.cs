@@ -8,6 +8,7 @@ using System.Resources;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Google.Apis.Customsearch.v1;
+using Google.Apis.Customsearch.v1.Data;
 using Google.Apis.Services;
 using Google.Apis.YouTube.v3;
 using Newtonsoft.Json;
@@ -212,7 +213,12 @@ namespace Mariusz_Stefan
 			if (possibleCommand == ".g")
 			{
 				var arg = message.Content.Substring(".g".Length);
-				SendMessage(message.Channel, GoogleSearchQuery(arg));
+				SendMessage(message.Channel, Googluj(arg));
+			}
+			if (possibleCommand == ".wyjasnij")
+			{
+				var arg = message.Content.Substring(".wyjasnij".Length);
+				SendMessage(message.Channel, Wyjasnij(arg));
 			}
 			#endregion
 
@@ -440,13 +446,23 @@ namespace Mariusz_Stefan
 			return $"https://www.youtube.com/watch?v={searchListResponse.Items[0].Id.VideoId}";
 		}
 
-		private string GoogleSearchQuery(string query)
+		private Result GoogleSearchQuery(string query)
 		{
 			var request = _customsearchService.Cse.List(query);
 			request.Cx = GoogleSearchEngineId;
 
 			var results = request.Execute().Items;
-			return results[0].Link;
+			return results[0];
+		}
+
+		private string Googluj(string query)
+		{
+			return GoogleSearchQuery(query).Link;
+		}
+
+		private string Wyjasnij(string query)
+		{
+			return GoogleSearchQuery(query).Snippet;
 		}
 		#endregion
 	}
