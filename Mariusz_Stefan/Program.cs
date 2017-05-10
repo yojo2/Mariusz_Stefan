@@ -2,6 +2,7 @@
 using Discord.WebSocket;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Resources;
 using System.Text.RegularExpressions;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 using Google.Apis.Customsearch.v1;
 using Google.Apis.Services;
 using Google.Apis.YouTube.v3;
+using Newtonsoft.Json;
 
 //todo:
 // -IMAGE SEARCH
@@ -19,10 +21,13 @@ namespace Mariusz_Stefan
 {
 	public class Program
 	{
-		private static readonly string YouTubeDataApiKey = "AIzaSyBrWyFrmFM7whCXLTjpqIxXB23X2jQdH4I";
-		private static readonly string GoogleSearchApiKey = "AIzaSyCufIRURGbtamFxKMBvD1-0eVkdnHRm1YY";
-		private static readonly string GoogleSearchEngineId = "006368784700686828841:4upmxfu-xhe";
+		private static string YouTubeDataApiKey;
+		private static string GoogleSearchApiKey;
+		private static string GoogleSearchEngineId;
+		private static string DiscordToken;
+
 		private static readonly char SplitCharacter = ',';
+
 		private CustomsearchService _customsearchService;
 
 		private readonly Dictionary<string, Func<string>> _zeroArgumentCommands = new Dictionary<string, Func<string>>();
@@ -87,16 +92,15 @@ namespace Mariusz_Stefan
 		public async Task MainAsync()
 		{
 			InitDictionaries();
-
+			LoadKeys(@"C:\Users\Szymek\Desktop\Mariusz_Stefan\Mariusz_Stefan\keys.json");
 			_customsearchService = new CustomsearchService(new BaseClientService.Initializer {ApiKey = GoogleSearchApiKey});
 
 			var client = new DiscordSocketClient();
 
 			client.Log += Logger;
 			client.MessageReceived += MessageReceived;
-
-			var token = "MzA3NjEzMzU0OTUwNzg3MDcy.C-U27g.MDa8cJhnFFaL9JIalK7llW4MFrk"; // Remember to keep this private!
-			await client.LoginAsync(TokenType.Bot, token);
+			
+			await client.LoginAsync(TokenType.Bot, DiscordToken);
 			await client.StartAsync();
 
 			// Block this task until the program is closed.
@@ -104,6 +108,30 @@ namespace Mariusz_Stefan
 		}
 
 		#region Helpers
+
+		private static void LoadKeys(string pathToJson)
+		{
+			var json = "";
+			try
+			{  
+				using (var sr = new StreamReader(pathToJson))
+				{
+					json = sr.ReadToEnd();
+				}
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine(Resources.file_cannot_be_read);
+				Console.WriteLine(e.Message);
+			}
+
+			var keys = JsonConvert.DeserializeObject<RootObject>(json).Keys;
+			YouTubeDataApiKey = keys.FirstOrDefault(k => k.name == nameof(YouTubeDataApiKey))?.key;
+			GoogleSearchApiKey = keys.FirstOrDefault(k => k.name == nameof(GoogleSearchApiKey))?.key;
+			GoogleSearchEngineId = keys.FirstOrDefault(k => k.name == nameof(GoogleSearchEngineId))?.key;
+			DiscordToken = keys.FirstOrDefault(k => k.name == nameof(DiscordToken))?.key;
+		}
+
 		private static Task Logger(LogMessage message)
 		{
 			var cc = Console.ForegroundColor;
@@ -346,6 +374,7 @@ namespace Mariusz_Stefan
 
 		private string Help()
 		{
+			//todo: get functions from dicts' keys
 			return "Mariusz Stefan poleca następujące funkcje: \n" +
 			       "help, ,boruc, bazinga, abcd, taknie, czy, ile, witam, " +
 			       "behe, kicek, tebeg, ocen, pfrt, kto, kogo, gdzie, kim, fullwidth, piwo, yt, g";

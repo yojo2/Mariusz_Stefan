@@ -1,0 +1,19 @@
+﻿{
+	"Keys": [{
+			"name": "YouTubeDataApiKey",
+			"key": ""
+		},
+		{
+			"name": "GoogleSearchApiKey",
+			"key": ""
+		},
+		{
+			"name": "GoogleSearchEngineId",
+			"key": ""
+		},
+		{
+			"name": "DiscordToken",
+			"key": ""
+		}
+	]
+}

@@ -70,6 +70,15 @@ namespace Mariusz_Stefan {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The file could not be read:.
+        /// </summary>
+        internal static string file_cannot_be_read {
+            get {
+                return ResourceManager.GetString("file_cannot_be_read", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to pod mostem, w dupie, na głowie, na kompie, w parafii.
         /// </summary>
         internal static string gdzie_prefix {
