@@ -61,7 +61,7 @@ namespace Mariusz_Stefan {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to tak, nie, nie wiem, być może, na pewno, to mało prawdopodobne, nie sądzę, jeszcze się pytasz?, tak (żartuję, hehe), tak, nie, tak (no homo), zaiste, no chyba cię pambuk opuścił, raczej nie, jeszcze nie, teraz już tak, może kiedyś, tak jest, panie kapitanie, panie januszu NIE, jeszcze nie wiem, daj mi chwilę to się zastanowię, nie wiem zarobiony jestem przyjdź Pan jutro.
+        ///   Looks up a localized string similar to tak, nie, nie wiem, być może, na pewno, to mało prawdopodobne, nie sądzę, jeszcze się pytasz?, tak (żartuję, hehe), tak, nie, tak (no homo), zaiste, no chyba cię pambuk opuścił, raczej nie, jeszcze nie, teraz już tak, może kiedyś, tak jest panie kapitanie, panie januszu NIE, jeszcze nie wiem, daj mi chwilę to się zastanowię, nie wiem zarobiony jestem przyjdź Pan jutro.
         /// </summary>
         internal static string czy {
             get {
