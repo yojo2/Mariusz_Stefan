@@ -22,6 +22,7 @@ namespace Mariusz_Stefan
 {
 	public class Program
 	{
+		#region Fields
 		private static string YouTubeDataApiKey;
 		private static string GoogleSearchApiKey;
 		private static string GoogleSearchEngineId;
@@ -38,6 +39,35 @@ namespace Mariusz_Stefan
 		private readonly Dictionary<string, Func<ISocketMessageChannel, string>> _oneChannelArgumentCommands = new Dictionary<string, Func<ISocketMessageChannel, string>>();
 
 		private readonly Dictionary<string, bool> _channelWhitelist = new Dictionary<string, bool>();
+
+
+		private readonly Random _random = new Random();
+		#endregion
+
+		#region Main
+		public static void Main(string[] args)
+			=> new Program().MainAsync().GetAwaiter().GetResult();
+
+		public async Task MainAsync()
+		{
+			InitDictionaries();
+			LoadKeys(@"C:\Users\Szymek\Desktop\Mariusz_Stefan\Mariusz_Stefan\keys.json");
+			_customsearchService = new CustomsearchService(new BaseClientService.Initializer {ApiKey = GoogleSearchApiKey});
+
+			var client = new DiscordSocketClient();
+
+			client.Log += Logger;
+			client.MessageReceived += MessageReceived;
+			
+			await client.LoginAsync(TokenType.Bot, DiscordToken);
+			await client.StartAsync();
+
+			// Block this task until the program is closed.
+			await Task.Delay(-1);
+		}
+		#endregion
+
+		#region Helpers
 
 		private void InitDictionaries()
 		{
@@ -84,32 +114,6 @@ namespace Mariusz_Stefan
 			_slapCommands.Add(".slap", Slap);
 
 		}
-
-		private readonly Random _random = new Random();
-
-		public static void Main(string[] args)
-			=> new Program().MainAsync().GetAwaiter().GetResult();
-
-		public async Task MainAsync()
-		{
-			InitDictionaries();
-			LoadKeys(@"C:\Users\Szymek\Desktop\Mariusz_Stefan\Mariusz_Stefan\keys.json");
-			_customsearchService = new CustomsearchService(new BaseClientService.Initializer {ApiKey = GoogleSearchApiKey});
-
-			var client = new DiscordSocketClient();
-
-			client.Log += Logger;
-			client.MessageReceived += MessageReceived;
-			
-			await client.LoginAsync(TokenType.Bot, DiscordToken);
-			await client.StartAsync();
-
-			// Block this task until the program is closed.
-			await Task.Delay(-1);
-		}
-
-		#region Helpers
-
 		private static void LoadKeys(string pathToJson)
 		{
 			var json = "";
@@ -214,11 +218,19 @@ namespace Mariusz_Stefan
 			{
 				var arg = message.Content.Substring(".g".Length);
 				SendMessage(message.Channel, Googluj(arg));
+				return;
 			}
 			if (possibleCommand == ".wyjasnij")
 			{
 				var arg = message.Content.Substring(".wyjasnij".Length);
 				SendMessage(message.Channel, Wyjasnij(arg));
+				return;
+			}
+			if (possibleCommand == ".img" || possibleCommand == "i")
+			{
+				var arg = message.Content.Substring(possibleCommand.Length);
+				SendMessage(message.Channel, Image(arg));
+				return;
 			}
 			#endregion
 
@@ -383,7 +395,7 @@ namespace Mariusz_Stefan
 			//todo: get functions from dicts' keys
 			return "Mariusz Stefan poleca następujące funkcje: \n" +
 			       "help, ,boruc, bazinga, abcd, taknie, czy, ile, witam, " +
-			       "behe, kicek, tebeg, ocen, pfrt, kto, kogo, gdzie, kim, fullwidth, piwo, yt, g";
+			       "behe, kicek, tebeg, ocen, pfrt, kto, kogo, gdzie, kim, fullwidth, piwo, yt, g, wyjasnij, img";
 		}
 
 		private string Pedal()
@@ -446,10 +458,12 @@ namespace Mariusz_Stefan
 			return $"https://www.youtube.com/watch?v={searchListResponse.Items[0].Id.VideoId}";
 		}
 
-		private Result GoogleSearchQuery(string query)
+		private Result GoogleSearchQuery(string query, CseResource.ListRequest.SearchTypeEnum? type = null)
 		{
 			var request = _customsearchService.Cse.List(query);
 			request.Cx = GoogleSearchEngineId;
+			if (type != null)
+				request.SearchType = CseResource.ListRequest.SearchTypeEnum.Image;
 
 			var results = request.Execute().Items;
 			return results[0];
@@ -463,6 +477,11 @@ namespace Mariusz_Stefan
 		private string Wyjasnij(string query)
 		{
 			return GoogleSearchQuery(query).Snippet;
+		}
+
+		private string Image(string query)
+		{
+			return GoogleSearchQuery(query, CseResource.ListRequest.SearchTypeEnum.Image).Link;
 		}
 		#endregion
 	}
