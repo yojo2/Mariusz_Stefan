@@ -118,10 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="czy" xml:space="preserve">
-    <value>tak, nie, nie wiem, być może, na pewno, to mało prawdopodobne, nie sądzę, jeszcze się pytasz?, tak (żartuję hehe), hehe)))))))))))))))))), tak, nie, tak (no homo), zaiste, no chyba cię pambuk opuścił, raczej nie, jeszcze nie, teraz już tak, może kiedyś, tak jest panie kapitanie, panie januszu NIE, jeszcze nie wiem, daj mi chwilę to się zastanowię, nie wiem zarobiony jestem przyjdź Pan jutro, a czy papież sra w lesie?</value>
+    <value>tak, nie, nie wiem, być może, na pewno, to mało prawdopodobne, nie sądzę, jeszcze się pytasz?, tak (żartuję hehe), hehe)))))))))))))))))), tak, nie, tak (no homo), zaiste, no chyba cię pambuk opuścił, raczej nie, jeszcze nie, teraz już tak, może kiedyś, tak jest panie kapitanie, panie januszu NIE, jeszcze nie wiem, daj mi chwilę to się zastanowię, nie wiem zarobiony jestem przyjdź Pan jutro, a czy papież sra w lesie?, co za debil wymyśla te pytania, jak najbardziej, gówno prawda, jeszcze jak, jest możliwe</value>
   </data>
   <data name="gdzie_prefix" xml:space="preserve">
-    <value>pod mostem, w dupie, na głowie, na kompie, w parafii</value>
+    <value>pod mostem, w dupie, na głowie, na kompie, w parafii, w koszu, w fapfolderze, na rowerze</value>
   </data>
   <data name="gdzie_suffix" xml:space="preserve">
     <value>Turambara,
@@ -179,31 +179,33 @@ Xerbera,
 u optiego,
 na wydziale elektrycznym,
 w Kathowicach,
-u Kath w piwnicy
-we Wrocławiu
-w Szczecinie
-w Brwinowie
-w Warszawie
-w Bogatyni
-w Golubiu-Dobrzynie
-w Rzeszowie
-w Krakowie
-w Bydgoszczy
-w Magdalence przy stole z pozostałymi zdrajcami
-tam gdzie stało ZOMO
-na serwerze Interii</value>
+u Kath w piwnicy,
+we Wrocławiu,
+w Szczecinie,
+w Brwinowie,
+w Warszawie,
+w Bogatyni,
+w Golubiu-Dobrzynie,
+w Rzeszowie,
+w Krakowie,
+w Bydgoszczy,
+w Magdalence przy stole z pozostałymi zdrajcami,
+tam gdzie stało ZOMO,
+na serwerze Interii,
+w Gołodupczynie,
+w kinie w Berlinie</value>
   </data>
   <data name="kim" xml:space="preserve">
     <value>Turambarem, yojecem, Lordem Nargoghiem, Rankinem, Kathajcem, Behemortem, orgiełem, Stillbornem, Metalusem, kickiem, podbielem, Sedinusem, Hakkenem, Tebem, Sermaciejem, t3trisem, optim, Hrabulą, FaceDancerem, Holim.Death, Ramzesem, POLIPem, mateuszem(stefanem), Xysiem, Germanottą, Berlinem, 8azyliszkiem, Seekerem, Murezorem, RIPem, Aidenem, Accounem, Felem, Dracią, Niziołką, Maverickiem, P_aulem, Brylantem, deffikiem, Deviusem, Gofrem, JamesemVooem, Black Shadowem, emqim, nerv3m, Pałkerem, Princess Nuem, Rysią, Shakerem, Artiusem, Stefanem, Xerberem</value>
   </data>
   <data name="kogo" xml:space="preserve">
-    <value>Turambara, yojca, Lorda Nargogha, Rankina, Kathajca, Behemorta, orgieła, Stillborna, Metalusa, kicka, podbiela, Sedinusa, Hakkena, Tebega, Sermacieja, t3trisa, optiego, FaceDancera, Holiego.Deatha, Ramzesa, POLIPa, mateusza(stefana), Xysia, Germanotty, Berlina, 8azyliszka, Seekera, Murezora, RIPa, Aidena,  Accouna, Fela, Dracii, Niziołki, Mavericka, P_aula, Brylanta, deffika, Deviusa, Gofra, JamesaVooa, Black Shadowa, emqiego, nerv4, Pałkera, Princess Nua, Rysi, Shakera, Artiusa, Stefana, Xerbera</value>
+    <value>Turambara, yojca, Lorda Nargogha, Rankina, Kathajca, Behemorta, orgieła, Stillborna, Metalusa, kicka, podbiela, Sedinusa, Hakkena, Teba, Sermacieja, t3trisa, optiego, FaceDancera, Holiego.Deatha, Ramzesa, POLIPa, mateusza(stefana), Xysia, Germanotty, Berlina, 8azyliszka, Seekera, Murezora, RIPa, Aidena,  Accouna, Fela, Dracii, Niziołki, Mavericka, P_aula, Brylanta, deffika, Deviusa, Gofra, JamesaVooa, Black Shadowa, emqiego, nerv4, Pałkera, Princess Nua, Rysi, Shakera, Artiusa, Stefana, Xerbera</value>
   </data>
   <data name="kto" xml:space="preserve">
-    <value>Turambar, yojec, Lord Nargogh, Rankin, Kathai, Behemort, orgiełe, Stillborn, Metalus, kicek, podbiel, Sedinus, Hakken, Tebeg, Sermaciej, t3tris, opti, Hrabula, FaceDancer, Holy.Death, Ramzes, POLIP, mateusz(stefan), Xysiu, Germanotta, Berlin, 8azyliszek, Seeker, Murezor, RIP, Aiden, Accoun, Fel, Dracia, Niziołka, Maverick, P_aul, Brylantem, deffik, Devius, Gofer, JamesVoo, Black Shadow, emqi, nerv0, Pałker, Princess Nue, Rysia, Shaker, Artius, Stefan, Xerber</value>
+    <value>Turambar, yojec, Lord Nargogh, Rankin, Kathajec, Behemort, orgiełe, Stillborn, Metalus, kicek, podbiel, Sedinus, Hakken, Teb, Sermaciej, t3tris, opti, Hrabula, FaceDancer, Holy.Death, Ramzes, POLIP, mateusz(stefan), Xysiu, Germanotta, Berlin, 8azyliszek, Seeker, Murezor, RIP, Aiden, Accoun, Fel, Dracia, Niziołka, Maverick, P_aul, Brylant, deffik, Devius, Gofer, JamesVoo, Black Shadow, emqi, nerv0, Pałker, Princess Nue, Rysia, Shaker, Artius, Stefan, Xerber</value>
   </data>
   <data name="pedal" xml:space="preserve">
-    <value>sam jesteś pedałem, sam jesteś gejem, lubię homosiów, chodź przytul mnie, jak ty do mnie mówisz, lubię gdy mnie tak nazywasz, przytul mnie ze swych ramion zbuduj schron</value>
+    <value>sam jesteś pedałem, sam jesteś gejem, lubię homosiów, chodź przytul mnie, jak ty do mnie mówisz, lubię gdy mnie tak nazywasz, przytul mnie ze swych ramion zbuduj schron, będziesz gwałcony przez 5 dni bo napisałeś do potężnego geja</value>
   </data>
   <data name="slap_areas" xml:space="preserve">
     <value>around the head, viciously, repeatedly, in the face, to death, in the balls,
@@ -228,7 +230,7 @@ Justin Bieber CD, fart cloud, dildo, lightsaber, rock, stick, nigger, dinosaur, 
 herring, spider, snake, ming vase, cow, jackhammer, hammer and sickle, razorblade, daemon, trident, gofer, alligator,
 bag of piss, lobster, beer pad, toaster, printer, nailgun, banana bomb, fetus, unicorn statue, blood vial, electron, spell,
 tin of spam, behemoth, hand grenade, hand of God, fist of fury, erection, Pudzian\s egg kick, pimp hand, darth fallus, dog turd,
-canoe, Atari 5200, booby trap, Gaben, fishbot, syntax error, blue screen of death</value>
+canoe, Atari 5200, booby trap, Gaben, fishbot, syntax error, blue screen of death, lamidexs lethal punch</value>
   </data>
   <data name="slap_verbs" xml:space="preserve">
     <value>slaps, hits, smashes, beats, bashes, smacks, blasts, punches, stabs,
@@ -240,10 +242,10 @@ tortures, shatters, wrecks, toasts, dominates, suffocates, oxidises, erases, sto
 whomps, swipes, pats, nails, thumps, *PAC*</value>
   </data>
   <data name="witam" xml:space="preserve">
-    <value>witam na kanale i życzę miłej zabawy, cześć, kopę lat, siemanko witam na moim kanale, witam witam również, no elo, salam alejkum, привет, dzińdybry, siemaszki,</value>
+    <value>witam na kanale i życzę miłej zabawy, cześć, kopę lat, siemanko witam na moim kanale, witam witam również, no elo, salam alejkum, привет, dzińdybry, siemaszki, gitara siema, dobrý den</value>
   </data>
   <data name="wulg" xml:space="preserve">
-    <value>kurw,chuj,pierdol,pierdal,jeb</value>
+    <value>kurw,chuj,pierdol,pierdal,jeb,cyka,blyat</value>
   </data>
   <data name="wulg_response" xml:space="preserve">
     <value>może byś tak kurwa nie przeklinał, co?, bez wulgaryzmów proszę, na ten kanał zaglądają dzieci, ostrożniej z językiem, to kanał PG13, czy mam ci język uciąć?, przestań przeklinać pedale bo cię stąd wypierdolę dyscyplinarnie, pambuk płacze jak przeklinasz, mów do mnie brzydko, Kath bączy jak przeklinasz, proszę tu nie przeklinać to porządna knajpa, nie ma takiego przeklinania chuju, блять))))))))))</value>
