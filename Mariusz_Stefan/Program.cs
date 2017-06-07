@@ -59,8 +59,7 @@ namespace Mariusz_Stefan
 
 			client.Log += Logger;
 			client.MessageReceived += MessageReceived;
-
-            string DiscordToken = "";
+            
             await client.LoginAsync(TokenType.Bot, DiscordToken);
 			await client.StartAsync();
 
