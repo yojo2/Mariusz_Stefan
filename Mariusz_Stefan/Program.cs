@@ -11,6 +11,7 @@ using Google.Apis.Customsearch.v1;
 using Google.Apis.Customsearch.v1.Data;
 using Google.Apis.Services;
 using Google.Apis.YouTube.v3;
+//using DuckDuckGo.Net;
 using Newtonsoft.Json;
 
 //todo:
@@ -51,15 +52,16 @@ namespace Mariusz_Stefan
 		public async Task MainAsync()
 		{
 			InitDictionaries();
-			LoadKeys(@"C:\Users\Szymek\Desktop\Mariusz_Stefan\Mariusz_Stefan\keys.json");
+			LoadKeys(@"keys.json");
 			_customsearchService = new CustomsearchService(new BaseClientService.Initializer {ApiKey = GoogleSearchApiKey});
 
 			var client = new DiscordSocketClient();
 
 			client.Log += Logger;
 			client.MessageReceived += MessageReceived;
-			
-			await client.LoginAsync(TokenType.Bot, DiscordToken);
+
+            string DiscordToken = "";
+            await client.LoginAsync(TokenType.Bot, DiscordToken);
 			await client.StartAsync();
 
 			// Block this task until the program is closed.
@@ -74,13 +76,19 @@ namespace Mariusz_Stefan
 			_channelWhitelist.Add("tts", true);
 			_channelWhitelist.Add("politbiuro", true);
 			_channelWhitelist.Add("linki", true);
+            _channelWhitelist.Add("luzna_jazda", true);
 
-			_zeroArgumentCommands.Add(".help", Help);
+            _channelWhitelist.Add("pecetgej", true);
+            _channelWhitelist.Add("niesmieszne", true);
+            _channelWhitelist.Add("japabocie", true);
+
+            _zeroArgumentCommands.Add(".help", Help);
 			_zeroArgumentCommands.Add(".gdzie", Gdzie);
 			_zeroArgumentCommands.Add(".kim", Kim);
 			_zeroArgumentCommands.Add(".kto", Kto);
 			_zeroArgumentCommands.Add(".kogo", Kogo);
-			_zeroArgumentCommands.Add(".czyje", Kogo);
+            _zeroArgumentCommands.Add(".komu", Komu);
+            _zeroArgumentCommands.Add(".czyje", Kogo);
 			_zeroArgumentCommands.Add(".czyja", Kogo);
 			_zeroArgumentCommands.Add(".czyim", Kogo);
 			_zeroArgumentCommands.Add(".pfrt", Pfrt);
@@ -107,10 +115,59 @@ namespace Mariusz_Stefan
 			_zeroArgumentCommands.Add(".gejas", Pedal);
 			_zeroArgumentCommands.Add(".gay", Pedal);
 
-			_oneChannelArgumentCommands.Add(".piwo", LiwkoLiwkoSkoczPoPiwko);
+
+            _zeroArgumentCommands.Add(".aiden", Aiden);
+            _zeroArgumentCommands.Add(".aidenie", Aiden);
+            _zeroArgumentCommands.Add(".accoun", Accounie);
+            _zeroArgumentCommands.Add(".accounie", Accounie);
+            _zeroArgumentCommands.Add(".behemort", Behemort);
+            _zeroArgumentCommands.Add(".deffik", Deffiku);
+            _zeroArgumentCommands.Add(".deffiku", Deffiku);
+            _zeroArgumentCommands.Add(".kathai", Kathai);
+            _zeroArgumentCommands.Add(".kicku", Kicku);
+            _zeroArgumentCommands.Add(".lghost", Lghoscie);
+            _zeroArgumentCommands.Add(".lghoscie", Lghoscie);
+            _zeroArgumentCommands.Add(".ramzes", Lghoscie);
+            _zeroArgumentCommands.Add(".ramzesie", Lghoscie);
+            _zeroArgumentCommands.Add(".lordeon", Lordeonie);
+            _zeroArgumentCommands.Add(".lordeonie", Lordeonie);
+            _zeroArgumentCommands.Add(".nargogu", Nargoghu);
+            _zeroArgumentCommands.Add(".nargoghu", Nargoghu);
+            _zeroArgumentCommands.Add(".org", Orgu);
+            _zeroArgumentCommands.Add(".orgu", Orgu);
+            _zeroArgumentCommands.Add(".polipie", Polipie);
+            _zeroArgumentCommands.Add(".podbiel", Podbielu);
+            _zeroArgumentCommands.Add(".podbielu", Podbielu);
+            _zeroArgumentCommands.Add(".seeker", Seekerze);
+            _zeroArgumentCommands.Add(".seekerze", Seekerze);
+            _zeroArgumentCommands.Add(".srane", Srane);
+            _zeroArgumentCommands.Add(".tebie", Tebie);
+            _zeroArgumentCommands.Add(".tetrisie", Tetrisie);
+            _zeroArgumentCommands.Add(".tetris", Tetrisie);
+            _zeroArgumentCommands.Add(".t3trisie", Tetrisie);
+            _zeroArgumentCommands.Add(".t3tris", Tetrisie);
+            _zeroArgumentCommands.Add(".tet", Tet);
+            _zeroArgumentCommands.Add(".t3t", Tet);
+            _zeroArgumentCommands.Add(".tetrzyt", Tetrzycie);
+            _zeroArgumentCommands.Add(".tetrzycie", Tetrzycie);
+            _zeroArgumentCommands.Add(".t3trzyt", Tetrzycie);
+            _zeroArgumentCommands.Add(".t3trzycie", Tetrzycie);
+            _zeroArgumentCommands.Add(".trepli", Trepli);
+            _zeroArgumentCommands.Add(".turq", Turq);
+            _zeroArgumentCommands.Add(".xysiu", Xysiu);
+            _zeroArgumentCommands.Add(".rabbi", Xysiu);
+            _zeroArgumentCommands.Add(".yojec", Yojec);
+            _zeroArgumentCommands.Add(".yojcu", Yojec);
+            _zeroArgumentCommands.Add(".kathajec", Kathajec);
+            _zeroArgumentCommands.Add(".kathajcu", Kathajec);
+
+            _oneChannelArgumentCommands.Add(".piwo", LiwkoLiwkoSkoczPoPiwko);
 			_oneChannelArgumentCommands.Add(".barman", LiwkoLiwkoSkoczPoPiwko);
 
-			_oneStringArgumentCommands.Add(".fullwidth", FullWidth);
+            _zeroArgumentCommands.Add("tbh", () => "smh");
+            _zeroArgumentCommands.Add("smh", () => "tbh");
+
+            _oneStringArgumentCommands.Add(".fullwidth", FullWidth);
 			_slapCommands.Add(".slap", Slap);
 
 		}
@@ -211,25 +268,34 @@ namespace Mariusz_Stefan
 			if (possibleCommand == ".yt")
 			{
 				var video = await YoutubeQuery(message.Content.Substring(".yt".Length));
-				SendMessage(message.Channel, video);
+				SendMessage(message.Channel, message.Author.Mention + ": " + video);
 				return;
 			}
 			if (possibleCommand == ".g")
 			{
 				var arg = message.Content.Substring(".g".Length);
-				SendMessage(message.Channel, Googluj(arg));
+				SendMessage(message.Channel, message.Author.Mention + ": " + Googluj(arg));
 				return;
-			}
-			if (possibleCommand == ".wyjasnij")
+            }
+            /*
+            if (possibleCommand == ".d")
+            {
+                var arg = message.Content.Substring(".d".Length);
+                DuckDuckGoSearchQuery(arg);
+                SendMessage(message.Channel, "test");
+                return;
+            }
+            */
+            if (possibleCommand == ".wyjasnij")
 			{
 				var arg = message.Content.Substring(".wyjasnij".Length);
-				SendMessage(message.Channel, Wyjasnij(arg));
+				SendMessage(message.Channel, message.Author.Mention + ": " + Wyjasnij(arg));
 				return;
 			}
-			if (possibleCommand == ".img" || possibleCommand == "i")
+			if (possibleCommand == ".img" || possibleCommand == ".i")
 			{
 				var arg = message.Content.Substring(possibleCommand.Length);
-				SendMessage(message.Channel, Image(arg));
+				SendMessage(message.Channel, message.Author.Mention + ": " + Image(arg));
 				return;
 			}
 			#endregion
@@ -238,7 +304,7 @@ namespace Mariusz_Stefan
 			var content = message.Content;
 			if (content.Length > 500)
 				return;
-
+            
 			#region Pushing Gaywards
 			if ("it gets bigger when I pull" == message.Content)
 				await message.Channel.SendMessageAsync(new string('m', _random.Next(3, 15)));
@@ -293,13 +359,18 @@ namespace Mariusz_Stefan
 		private string Kogo()
 		{
 			return Extensions.RandomChoice(Resources.kogo.Split(SplitCharacter).ToArray()).Trim();
-		}
+        }
 
-		#endregion
+        private string Komu()
+        {
+            return Extensions.RandomChoice(Resources.komu.Split(SplitCharacter).ToArray()).Trim();
+        }
 
-		#region Misc
+        #endregion
 
-		private string Pfrt()
+        #region Misc
+
+        private string Pfrt()
 		{
 			return new string('p', _random.Next(1, 5)) +
 			       new string('f', _random.Next(2, 8)) +
@@ -319,7 +390,7 @@ namespace Mariusz_Stefan
 			if (mark != 0 && mark != 10)
 				retval += Extensions.RandomChoice(new[] {"", ",5", "-", "+"}) + "/10";
 			if (mark > 7)
-				retval += Extensions.RandomChoice(new[] {"", "+ znak jakości CD-Action", "- Berlin poleca"});
+				retval += Extensions.RandomChoice(new[] {"", " + znak jakości CD-Action", " - Berlin poleca"});
 
 			return retval;
 		}
@@ -344,9 +415,273 @@ namespace Mariusz_Stefan
 		private string Witam()
 		{
 			return Extensions.RandomChoice(Resources.witam.Split(SplitCharacter).ToArray());
-		}
+        }
 
-		private string Czy()
+        private string Aiden()
+        {
+            Random random = new Random();
+            var ret = "Aiden " + Extensions.RandomChoice(Resources.aiden.Split(SplitCharacter).ToArray());
+            if (random.Next(0, 2) == 0)
+            {
+                ret += " i " + Extensions.RandomChoiceNext(Resources.aiden.Split(SplitCharacter).ToArray());
+            }
+            return ret;
+        }
+
+        private string Accounie ()
+        {
+            Random random = new Random();
+            var ret = "Accounie Accounie ty " + Extensions.RandomChoice(Resources.accounie.Split(SplitCharacter).ToArray());
+            if (random.Next(0, 2) == 0)
+            {
+                ret += " i " + Extensions.RandomChoiceNext(Resources.accounie.Split(SplitCharacter).ToArray());
+            }
+            return ret;
+        }
+
+        private string Behemort ()
+        {
+            Random random = new Random();
+            var ret = "Behemort " + Extensions.RandomChoice(Resources.behemort.Split(SplitCharacter).ToArray());
+            if (random.Next(0, 2) == 0)
+            {
+                ret += " i " + Extensions.RandomChoiceNext(Resources.behemort.Split(SplitCharacter).ToArray());
+            }
+            return ret;
+        }
+
+        private string Deffiku ()
+        {
+            Random random = new Random();
+            var ret = "deffiku deffiku ty " + Extensions.RandomChoice(Resources.deffiku.Split(SplitCharacter).ToArray());
+            if (random.Next(0, 2) == 0)
+            {
+                ret += " i " + Extensions.RandomChoiceNext(Resources.deffiku.Split(SplitCharacter).ToArray());
+            }
+            return ret;
+        }
+
+        private string Podbielu()
+        {
+            Random random = new Random();
+            var ret = "podbielu podbielu ty " + Extensions.RandomChoice(Resources.podbielu.Split(SplitCharacter).ToArray());
+            if (random.Next(0, 2) == 0)
+            {
+                ret += " i " + Extensions.RandomChoiceNext(Resources.podbielu.Split(SplitCharacter).ToArray());
+            }
+            return ret;
+        }
+
+        private string Kathai ()
+        {
+            Random random = new Random();
+            var ret = "Kathai " + Extensions.RandomChoice(Resources.kathai.Split(SplitCharacter).ToArray());
+            if (random.Next(0, 2) == 0)
+            {
+                ret += " i " + Extensions.RandomChoiceNext(Resources.kathai.Split(SplitCharacter).ToArray());
+            }
+            return ret;
+        }
+
+        private string Kicku ()
+        {
+            Random random = new Random();
+            var ret = "kicku kicku ty " + Extensions.RandomChoice(Resources.kicku.Split(SplitCharacter).ToArray());
+            if (random.Next(0, 2) == 0)
+            {
+                ret += " i " + Extensions.RandomChoiceNext(Resources.kicku.Split(SplitCharacter).ToArray());
+            }
+            return ret;
+        }
+
+        private string Lghoscie ()
+        {
+            Random random = new Random();
+            var ret = "lghoście lghoście ty " + Extensions.RandomChoice(Resources.lghoscie.Split(SplitCharacter).ToArray());
+            if (random.Next(0, 2) == 0)
+            {
+                ret += " i " + Extensions.RandomChoiceNext(Resources.lghoscie.Split(SplitCharacter).ToArray());
+            }
+            return ret;
+        }
+
+        private string Lordeonie ()
+        {
+            Random random = new Random();
+            var ret = "Lordeonie Lordeonie ty " + Extensions.RandomChoice(Resources.lordeonie.Split(SplitCharacter).ToArray());
+            if (random.Next(0, 2) == 0)
+            {
+                ret += " i " + Extensions.RandomChoiceNext(Resources.lordeonie.Split(SplitCharacter).ToArray());
+            }
+            return ret;
+        }
+
+        private string Nargoghu ()
+        {
+            Random random = new Random();
+            var ret = "Nargoghu Nargoghu ty " + Extensions.RandomChoice(Resources.nargoghu.Split(SplitCharacter).ToArray());
+            if (random.Next(0, 2) == 0)
+            {
+                ret += " i " + Extensions.RandomChoiceNext(Resources.nargoghu.Split(SplitCharacter).ToArray());
+            }
+            return ret;
+        }
+
+        private string Orgu ()
+        {
+            Random random = new Random();
+            var ret = "orgu orgu ty " + Extensions.RandomChoice(Resources.orgu.Split(SplitCharacter).ToArray());
+            if (random.Next(0, 2) == 0)
+            {
+                ret += " i " + Extensions.RandomChoiceNext(Resources.orgu.Split(SplitCharacter).ToArray());
+            }
+            return ret;
+        }
+
+        private string Polipie ()
+        {
+            Random random = new Random();
+            var ret = "POLIPie POLIPie ty " + Extensions.RandomChoice(Resources.polipie.Split(SplitCharacter).ToArray());
+            if (random.Next(0, 2) == 0)
+            {
+                ret += " i " + Extensions.RandomChoiceNext(Resources.polipie.Split(SplitCharacter).ToArray());
+            }
+            return ret;
+        }
+
+        private string Sermacieju ()
+        {
+            Random random = new Random();
+            var ret = "Sermacieju Sermacieju ty " + Extensions.RandomChoice(Resources.sermacieju.Split(SplitCharacter).ToArray());
+            if (random.Next(0, 2) == 0)
+            {
+                ret += " i " + Extensions.RandomChoiceNext(Resources.sermacieju.Split(SplitCharacter).ToArray());
+            }
+            return ret;
+        }
+
+        private string Seekerze ()
+        {
+            Random random = new Random();
+            var ret = "Seekerze Seekerze ty " + Extensions.RandomChoice(Resources.seekerze.Split(SplitCharacter).ToArray());
+            if (random.Next(0, 2) == 0)
+            {
+                ret += " i " + Extensions.RandomChoiceNext(Resources.seekerze.Split(SplitCharacter).ToArray());
+            }
+            return ret;
+        }
+
+        private string Srane ()
+        {
+            Random random = new Random();
+            var ret = "rane " + Extensions.RandomChoice(Resources.srane.Split(SplitCharacter).ToArray());
+            if (random.Next(0, 2) == 0)
+            {
+                ret += " i " + Extensions.RandomChoiceNext(Resources.srane.Split(SplitCharacter).ToArray());
+            }
+            return ret;
+        }
+
+        private string Tebie()
+        {
+            Random random = new Random();
+            var ret = "Tebie " + Extensions.RandomChoice(Resources.tebie.Split(SplitCharacter).ToArray());
+            if (random.Next(0, 2) == 0)
+            {
+                ret += " i " + Extensions.RandomChoiceNext(Resources.tebie.Split(SplitCharacter).ToArray());
+            }
+            return ret;
+        }
+
+        private string Tetrisie ()
+        {
+            Random random = new Random();
+            var ret = "t3trisie t3trisie ty " + Extensions.RandomChoice(Resources.tetrisie.Split(SplitCharacter).ToArray());
+            if (random.Next(0, 2) == 0)
+            {
+                ret += " i " + Extensions.RandomChoiceNext(Resources.tetrisie.Split(SplitCharacter).ToArray());
+            }
+            return ret;
+        }
+
+        private string Tet ()
+        {
+            Random random = new Random();
+            var ret = "t3t " + Extensions.RandomChoice(Resources.tet.Split(SplitCharacter).ToArray());
+            if (random.Next(0, 2) == 0)
+            {
+                ret += " i " + Extensions.RandomChoiceNext(Resources.tet.Split(SplitCharacter).ToArray());
+            }
+            return ret;
+        }
+
+        private string Tetrzycie()
+        {
+            Random random = new Random();
+            var ret = "t3trzycie t3trzycie ty " + Extensions.RandomChoice(Resources.tetrzycie.Split(SplitCharacter).ToArray());
+            if (random.Next(0, 2) == 0)
+            {
+                ret += " i " + Extensions.RandomChoiceNext(Resources.tetrzycie.Split(SplitCharacter).ToArray());
+            }
+            return ret;
+        }
+
+        private string Trepli ()
+        {
+            Random random = new Random();
+            var ret = "Trepli " + Extensions.RandomChoice(Resources.trepli.Split(SplitCharacter).ToArray());
+            if (random.Next(0, 2) == 0)
+            {
+                ret += " i " + Extensions.RandomChoiceNext(Resources.trepli.Split(SplitCharacter).ToArray());
+            }
+            return ret;
+        }
+
+        private string Turq()
+        {
+            Random random = new Random();
+            var ret = "Turq Turq ty " + Extensions.RandomChoice(Resources.turq.Split(SplitCharacter).ToArray());
+            if (random.Next(0, 2) == 0)
+            {
+                ret += " i " + Extensions.RandomChoiceNext(Resources.turq.Split(SplitCharacter).ToArray());
+            }
+            return ret;
+        }
+
+        private string Xysiu ()
+        {
+            Random random = new Random();
+            var ret = "Xysiu Xysiu ty " + Extensions.RandomChoice(Resources.xysiu.Split(SplitCharacter).ToArray());
+            if (random.Next(0, 2) == 0)
+            {
+                ret += " i " + Extensions.RandomChoiceNext(Resources.xysiu.Split(SplitCharacter).ToArray());
+            }
+            return ret;
+        }
+
+        private string Yojec ()
+        {
+            Random random = new Random();
+            var ret = "yojec " + Extensions.RandomChoice(Resources.yojec.Split(SplitCharacter).ToArray());
+            if (random.Next(0, 2) == 0)
+            {
+                ret += " i " + Extensions.RandomChoiceNext(Resources.yojec.Split(SplitCharacter).ToArray());
+            }
+            return ret;
+        }
+
+        private string Kathajec()
+        {
+            Random random = new Random();
+            var ret = "Kathajec " + Extensions.RandomChoice(Resources.yojec.Split(SplitCharacter).ToArray());
+            if (random.Next(0, 2) == 0)
+            {
+                ret += " i " + Extensions.RandomChoiceNext(Resources.yojec.Split(SplitCharacter).ToArray());
+            }
+            return ret;
+        }
+
+        private string Czy()
 		{
 			if (_random.Next(0, 15) == 1)
 				return "nie wiem, spytaj " + Kogo();
@@ -401,9 +736,9 @@ namespace Mariusz_Stefan
 		private string Pedal()
 		{
 			return Extensions.RandomChoice(Resources.pedal.Split(','));
-		}
+        }
 
-		private string LiwkoLiwkoSkoczPoPiwko(IChannel msgChannel)
+        private string LiwkoLiwkoSkoczPoPiwko(IChannel msgChannel)
 		{
 			var usersList = msgChannel.GetUsersAsync(CacheMode.CacheOnly).ToArray().Result;
 			var t = usersList.ElementAt(_random.Next(0, usersList.Length)).Where(u => u.Status != UserStatus.Offline).ToArray();
@@ -451,14 +786,42 @@ namespace Mariusz_Stefan
 			var searchListRequest = youtubeService.Search.List("snippet");
 			searchListRequest.Q = query;
 			searchListRequest.MaxResults = 1;
+            searchListRequest.Type = "video";
 
-			// Call the search.list method to retrieve results matching the specified query term.
-			var searchListResponse = await searchListRequest.ExecuteAsync();
+            // Call the search.list method to retrieve results matching the specified query term.
+            var searchListResponse = await searchListRequest.ExecuteAsync();
+            var vid = "";
+            
+            if (searchListResponse.PageInfo.TotalResults > 0)
+            {
+                vid = searchListResponse.Items[0].Id.VideoId;
+            }
+            else
+            {
+                vid = "dQw4w9WgXcQ";
+            }
 
-			return $"https://www.youtube.com/watch?v={searchListResponse.Items[0].Id.VideoId}";
+			return $"https://www.youtube.com/watch?v={vid}";
 		}
 
-		private Result GoogleSearchQuery(string query, CseResource.ListRequest.SearchTypeEnum? type = null)
+/*
+        private SearchResult DuckDuckGoSearchQuery(string query, CseResource.ListRequest.SearchTypeEnum? type = null)
+        {
+            var search = new DuckDuckGo.Net.Search
+            {
+                NoHtml = true,
+                NoRedirects = true,
+                IsSecure = true,
+                SkipDisambiguation = true
+            };
+
+            var searchResult = search.Query(query, "DiscordBot");
+            Console.Out.WriteLine(searchResult);
+
+            return searchResult;
+        }
+*/
+        private Result GoogleSearchQuery(string query, CseResource.ListRequest.SearchTypeEnum? type = null)
 		{
 			var request = _customsearchService.Cse.List(query);
 			request.Cx = GoogleSearchEngineId;
